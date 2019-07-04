@@ -5,66 +5,54 @@
  */
 package com.mycloud.services;
 
-import com.mycloud.business.DocumentoStore;
-import com.mycloud.entity.Documento;
-import java.util.List;
+import com.mycloud.business.UserStore;
+import com.mycloud.entity.User;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 /**
  *
  * @author tss
  */
-@Path("/documents")
-public class DocumentiResource {
-    
+@Path("/users")
+public class UsersResource {
     
     @Inject
-    DocumentoStore documentostore;
+    UserStore userstore;
     
-    
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-   public List<Documento> getDocumenti(){
-       
-       List<Documento> listOfDocumenti = documentostore.findAll();
-       return listOfDocumenti;
-   }
-  
    @GET
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
-   public Documento getDocumentoById(@PathParam("id") Integer id){
-       return documentostore.find(id);
+   public User getUserById(@PathParam("id")int id){
+       return userstore.findId(id);
    }
    
    @POST
    @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
-   public void addDocumento (Documento d){
-       documentostore.addDocumento(d);
+   public User addUser (User u) {
+       return userstore.addUser(u);
    }
    
    @PUT
+   @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.APPLICATION_JSON)
-   public Documento updateDocumento(Documento d){
-       return documentostore.updateDocumento(d);
+   public User updateUser(User u){
+       return userstore.updateUser(u);
    }
    
    @DELETE
    @Path("/{id}")
    @Produces(MediaType.APPLICATION_JSON)
-   public void remove(@PathParam("id")Integer id){
-       documentostore.remove(id);
+   public void remove (@PathParam("id")int id){
+       userstore.remove(id);
    }
-   
-   
 }

@@ -5,26 +5,13 @@
  */
 package com.mycloud.business;
 
-import com.mycloud.entity.Configuration;
 import com.mycloud.entity.User;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Paths;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
-import javax.ejb.EJBException;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.metamodel.SingularAttribute;
-import javax.ws.rs.Path;
-
 /**
  *
  * @author tss
@@ -33,67 +20,51 @@ import javax.ws.rs.Path;
 public class UserStore {
 
     
+
+    
     @PersistenceContext
     EntityManager em;
-    
-    @Inject
-    DocumentoStore documentostore;
-    
-       public Optional<User> login (String usr, String pwd){
-      
-        try{
-      User p =  em.createQuery("SELECT e FROM User e" 
-              + "WHERE e.usr= :usr and e.pwd= :pwd", 
-                  User.class)
-                .setParameter("usr", usr)
-                .setParameter("pwd", pwd)
-                .getSingleResult();
-      return Optional.of(p);
-    }catch(NoResultException | NonUniqueResultException ex) {
-        return Optional.empty();
+ 
+ 
+        public Optional<User> login(String usr, String pwd) {
+        try {
+            User p = em.createQuery("select e from User e "
+                    + "where e.usr= :usr and e.pwd= :pwd", User.class)
+                    .setParameter("usr", usr)
+                    .setParameter("pwd", pwd)
+                    .getSingleResult();
+            return Optional.of(p);
+        } catch (NoResultException | NonUniqueResultException ex) {
+            return Optional.empty();
         }
-    }  
+      }
     
-       
- public List <User> findAll(){
-     return em.createQuery("SELECT e FROM User e ORDER BY e.cognome", User.class)
-             .getResultList();
- }    
- 
- public User find (Long id){
-     return em.find(User.class, id);
- }
- 
- public User save (User u){
-     User saved = em.merge(u);
-     Path path = Paths.get(Configuration.DOCUMENT_FOLDER + saved.getUsername());
-     if(Files.notExists(path, LinkOption.NOFOLLOW_LINKS)){
-         try {
-             Files.createDirectory(path);
-         } catch (IOException ex){
-             throw new EJBException("save user failed");
-         }
-     }
-     return saved;
- }
- 
- public void remove (Long id){
-    User saved = find(id);
-    em.createQuery("delete from Documento e where e.user= :usr")
-            .setParameter("usr", saved)
-            .executeUpdate();
-    em.remove(find(id));
-    try {
-        deleteDirectoryStream(Paths.get(Configuration.DOCUMENT_FOLDER + saved.getUsername()));
-    } catch (IOException ex){
-        throw new EJBException ("remove user failed...");
+    
+    
+    
+    public User find (Integer id){
+        return em.find(User.class, id);
     }
- }
- 
- private void deleteDirectoryStream(Path path) throw IOException {
-     Files.walk(path)
-             .sorted(Comparator.reverseOrder())
-             .map(Path::toFile)
-             .forEach(File::delete);
- }
+    
+    public User save (User u){
+        return em.merge(u);
+    }
+    
+    public void remove(Integer id){
+        em.remove(find(id));
+    }
+    
+    public User addUser(User u){
+        return em.merge(u);
+    }
+    
+    public User updateUser(User u){
+        return em.merge(u);
+    }
+    
+    public User findId (Integer id){
+        return em.find(User.class, id);
+    }
+   
+  
 }

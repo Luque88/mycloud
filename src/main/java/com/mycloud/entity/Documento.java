@@ -124,13 +124,7 @@ public class Documento implements Serializable {
         return "Documento{" + "id=" + id + ", titolo=" + titolo + ", file=" + file + ", user=" + user + ", tags=" + tags + '}';
     }
 
-
-    
-    
-  
-    
-    
-    
+ 
     
     
     
