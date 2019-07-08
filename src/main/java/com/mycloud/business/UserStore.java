@@ -6,8 +6,10 @@
 package com.mycloud.business;
 
 import com.mycloud.entity.User;
+import java.util.List;
 import java.util.Optional;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -24,6 +26,9 @@ public class UserStore {
     
     @PersistenceContext
     EntityManager em;
+    
+    @Inject
+    DocumentoStore documentostore;
  
  
         public Optional<User> login(String usr, String pwd) {
@@ -66,5 +71,18 @@ public class UserStore {
         return em.find(User.class, id);
     }
    
+  public List<User> findAll() {
+		return em.createQuery("SELECT u FROM User u ORDER BY u.id", User.class).getResultList();
+	}
   
+  public Optional <User> findByUser(String usr){
+      try{
+      User p= em.createQuery("SELECT u FROM User u" + "WHERE u.usr= :usr", User.class)
+              .setParameter("usr", usr)
+              .getSingleResult();
+      return Optional.of(p);
+      }catch(NoResultException | NonUniqueResultException ex){
+          return Optional.empty();
+      }  
+  }
 }

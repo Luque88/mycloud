@@ -21,21 +21,21 @@ import javax.persistence.Table;
  * @author tss
  */
 @Entity
-@Table(name="condivisione")
+@Table(name = "condivisione")
 public class Condivisione implements Serializable {
-    
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    
+
     @ManyToOne
-    @JoinColumn(name="documento_id")
-    private String documento;
-    
+    @JoinColumn(name = "documento_id")
+    private Documento documento;
+
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private String user;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Integer getId() {
         return id;
@@ -45,19 +45,19 @@ public class Condivisione implements Serializable {
         this.id = id;
     }
 
-    public String getDocumento() {
+    public Documento getDocumento() {
         return documento;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(Documento documento) {
         this.documento = documento;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -90,6 +90,5 @@ public class Condivisione implements Serializable {
     public String toString() {
         return "Condivisione{" + "id=" + id + ", documento=" + documento + ", user=" + user + '}';
     }
-    
-    
+
 }

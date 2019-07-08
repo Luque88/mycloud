@@ -4,32 +4,50 @@
     Author     : tss
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/app.css" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" href="">
-        <script src="js/../" type="text/javascript"></script>
+        <c:import url="./includes/imports.jsp"/>
         <title>Documento</title>
     </head>
     <body>
-        <form>
-            <div class="campo">
-                <label for="titolo">Titolo: </label>
-                <input type="text" id="titolo" value="" placeholder="inserisci il titolo" />
-            </div>
-            <div class="campo">
-                <label for="file">File: </label>
-                <input type="text" id="file" name="file" value="" placeholder="inserisci il file"/>
-            </div>
-            <div class="campo">
-                <label for="user">User: </label>
-                <input type="text" id="user" name="username" value="" placeholder="scegli"
-           </div>    
+        <main>
+            <header>
+                <nav>
+                <c:import url="./includes/menu.jsp"/>
+                </nav>
                 
-        </form> 
-       
+            </header>
+                <article>
+                    <div id="contenitore"></div>
+                    //da mettere nel css
+                    <br><br>
+                    <form class="pure-form">
+                        //da mettere nel css
+                        <fieldset>
+                            <legend>Inserisci/Modifica DOCUMENTI</legend>
+                            <label for="titolo">Titolo: </label>
+                            <input type="text" id="titolo">
+                            //css pure qua?
+                            <label for="file">File: </label>
+                            <input type="text" id="file">
+                            //css pure qua?
+                            <label for="user_id">User: </label>
+                            <input type="text" id="user_id">
+                            <input type="button" class="pure-button pure-button-primary" id="b_modDoc" value="Conferma modifica">
+                            <br>
+                        </fieldset>  
+                        
+                    </form>
+                </article>
+                <footer>
+                    <c:import url="./includes/footer.jsp"/>
+                </footer>
+        </main>
+                <script src="./indexDocumento.js" type="module"></script>
+                // fare javascript di Documento
     </body>
 </html>

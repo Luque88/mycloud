@@ -8,11 +8,11 @@ package com.mycloud.services;
 import com.mycloud.business.DocumentoStore;
 import com.mycloud.entity.Documento;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 /**
  *
  * @author tss
- */
+*/
 @Path("/documents")
 public class DocumentiResource {
     
@@ -33,6 +33,7 @@ public class DocumentiResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"users"})
    public List<Documento> getDocumenti(){
        
        List<Documento> listOfDocumenti = documentostore.findAll();

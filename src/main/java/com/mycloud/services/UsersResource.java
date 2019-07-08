@@ -7,6 +7,8 @@ package com.mycloud.services;
 
 import com.mycloud.business.UserStore;
 import com.mycloud.entity.User;
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,6 +18,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.ResourceContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -28,8 +32,22 @@ public class UsersResource {
     @Inject
     UserStore userstore;
     
+    @Context
+    ResourceContext rc;
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"users"})
+   public List<User> getUsers(){
+       
+       List<User> listOfUsers = userstore.findAll();
+       return listOfUsers;
+   }
+    
+    
    @GET
    @Path("/{id}")
+   @RolesAllowed({"users"})
    @Produces(MediaType.APPLICATION_JSON)
    public User getUserById(@PathParam("id")int id){
        return userstore.findId(id);
@@ -51,6 +69,7 @@ public class UsersResource {
    
    @DELETE
    @Path("/{id}")
+   @RolesAllowed({"users"})
    @Produces(MediaType.APPLICATION_JSON)
    public void remove (@PathParam("id")int id){
        userstore.remove(id);

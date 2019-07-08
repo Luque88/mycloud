@@ -5,22 +5,47 @@
  */
 package com.mycloud.business;
 
+import com.mycloud.Configuration;
 import com.mycloud.entity.Documento;
+import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Path;
+import org.eclipse.microprofile.jwt.Claims;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 /**
  *
  * @author tss
  */
-
+@RolesAllowed({"users"})
 @Stateless
 public class DocumentoStore {
     
   
     @PersistenceContext
     EntityManager em;
+    
+    @Inject
+    Principal principal;
+    
+    @Inject
+    JsonWebToken token;
+    
+    @Inject
+    UserStore userstore;
+    
+     public List<Documento> all() {
+        System.out.println("token user: " + token.getName());
+        System.out.println("token email: " + token.getClaim(Claims.email.name()));
+        return em.createQuery("select e from Documento e where e.user.usr= :usr")
+                .setParameter("usr", principal.getName())
+                .getResultList();
+    }
     
 public Documento find (Integer id){
     return em.find(Documento.class, id);
@@ -53,5 +78,10 @@ public List<Documento> findAll() {
 				.getResultList();
 
 	}
+     private Path documentPath(String name) {
+        return (Path) Paths.get(principal.getName()
+                + Configuration.DOCUMENT_FOLDER + "/" + name);
+    }   
+        
 }
    
