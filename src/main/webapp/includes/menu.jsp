@@ -8,7 +8,11 @@
                class="pure-menu-link">Documenti</a></li>
          <li class="pure-menu-item">
             <a href="${pageContext.request.contextPath}/User.jsp" 
-               class="pure-menu-link">User</a></li>      
+               class="pure-menu-link">Anagrafica Utenti</a></li>      
+          <li class="pure-menu-item">
+            <a href="${pageContext.request.contextPath}/logout.jsp" 
+               class="pure-menu-link">Logout</a></li>       
+               
                       
     </ul>
 </nav>

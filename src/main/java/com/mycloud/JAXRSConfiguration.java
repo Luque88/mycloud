@@ -1,5 +1,7 @@
 package com.mycloud;
 
+
+
 import java.util.Set;
 import javax.annotation.security.DeclareRoles;
 import javax.enterprise.context.ApplicationScoped;

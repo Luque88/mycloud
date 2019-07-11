@@ -11,50 +11,54 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <c:import url="./includes/imports.jsp"/>
-        <title>Autenticazione</title>
+      
+    <title>Autenticazione</title>
     </head>
     <body>
-        <main>
+        <main> 
             <header>
                 <nav>
                     <c:import url="./includes/menu.jsp"/>
                 </nav>
+                
             </header>
-                <article>
-                    <div id="contenitore"></div>
-                    <br><br>
-                    <form class="pure-form">
-                        <fieldset>
-                            <legend>Inserisci User</legend>
-                            <label for="cognome">Cognome:  </label>
-                            <input type="text" id="cognome">
-                        </fieldset> 
-                      
-                        <fieldset>
-                            <label for="nome">Nome:  </label>
-                            <input type="text" id="nome">
-                        </fieldset>
-                        
-                        <fieldset>
-                            <label for="username">Username:  </label>
-                            <input type="text" id="username">
-                        </fieldset>
-                        
-                        <fieldset>
-                            <label for="password">Password: </label>
-                            <input type="text" id="password">
-                        </fieldset>
-                        
-                        <fieldset>
-                            <label for="email">Email: </label>
-                            <input type="text" id="email">
-                        </fieldset>
-                        
-                        <input type="button" class="pure-button pure-button-primary" id="b_inserisci" value="Inserisci">
-                    </form>
-                    
-                </article>
-        </main>
-                <script src="js/user.js" type="text/javascript"></script>
+        <form class="pure-form">
+            <div class="campo">
+                <label for="cognome"> Cognome: </label>
+                <input type="text" id="cognome" value="" placeholder="inserisci il cognome"/>
+            </div> 
+            <br>
+            <div class="campo">
+                <label for="nome"> Nome: </label>
+                <input type="text" id="nome" value="" placeholder="inserisci il nome"/>
+            </div>
+            <br>
+            <div class="username">
+                <label for="username"> Username: </label>
+                <input type="text" id="username" value="" placeholder="inserisci username"/>
+            </div>  
+            <br>
+              <div class="password">
+                <label for="password"> Password: </label>
+                <input type="text" id="password" value="" placeholder="inserisci password"/>
+            </div>  
+            <br>
+             <div class="email">
+                <label for="email"> Email: </label>
+                <input type="text" id="email" value="" placeholder="inserisci email"/>
+            </div>    
+            
+            </div>
+            <br>
+            <div class="campo">
+                <label for="pButton"></label>
+                <input type="button" class="pure-button pure-button-primary" value="Inserisci i dati" id="pButton"/>
+            </div>
+            
+        </form>
+                <footer> 
+                    <c:import url="./includes/footer.jsp"/>
+                </footer>
+        <script src="js/user.js" type="module"></script>
     </body>
-</html>
+    </html>

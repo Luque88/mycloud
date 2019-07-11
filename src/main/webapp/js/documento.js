@@ -1,5 +1,7 @@
 var jsonDocumenti;
 
+document.querySelector("body").onload = caricaDocumenti;
+
 function caricaDocumento(){
     fetch('http://localhost:8080/mycloud/resources/documents')
             .then(response => {

@@ -23,6 +23,8 @@ import javax.ws.rs.core.MediaType;
  *
  * @author tss
 */
+
+@RolesAllowed({"users"})
 @Path("/documents")
 public class DocumentiResource {
     
@@ -31,12 +33,12 @@ public class DocumentiResource {
     DocumentoStore documentostore;
     
     
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"users"})
+   @GET
+   @Produces(MediaType.APPLICATION_JSON)
+  
    public List<Documento> getDocumenti(){
        
-       List<Documento> listOfDocumenti = documentostore.findAll();
+      List<Documento> listOfDocumenti = documentostore.findAll();
        return listOfDocumenti;
    }
   
@@ -66,6 +68,5 @@ public class DocumentiResource {
    public void remove(@PathParam("id")Integer id){
        documentostore.remove(id);
    }
-   
-   
+
 }

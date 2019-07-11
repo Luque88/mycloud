@@ -82,7 +82,7 @@ public class Documento implements Serializable {
         return user;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(User logged) {
         this.user = user;
     }
 
@@ -123,6 +123,8 @@ public class Documento implements Serializable {
     public String toString() {
         return "Documento{" + "id=" + id + ", titolo=" + titolo + ", file=" + file + ", user=" + user + ", tags=" + tags + '}';
     }
+
+ 
 
  
     

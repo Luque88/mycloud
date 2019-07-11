@@ -23,18 +23,18 @@
             </header>
                 <article>
                     <div id="contenitore"></div>
-                    //da mettere nel css
+                  
                     <br><br>
                     <form class="pure-form">
-                        //da mettere nel css
+                      
                         <fieldset>
                             <legend>Inserisci/Modifica DOCUMENTI</legend>
                             <label for="titolo">Titolo: </label>
                             <input type="text" id="titolo">
-                            //css pure qua?
+                           
                             <label for="file">File: </label>
                             <input type="text" id="file">
-                            //css pure qua?
+                         
                             <label for="user_id">User: </label>
                             <input type="text" id="user_id">
                             <input type="button" class="pure-button pure-button-primary" id="b_modDoc" value="Conferma modifica">
@@ -47,7 +47,7 @@
                     <c:import url="./includes/footer.jsp"/>
                 </footer>
         </main>
-                <script src="./indexDocumento.js" type="module"></script>
-                // fare javascript di Documento
+                <script src="./documento.js" type="module"></script>
+               
     </body>
 </html>

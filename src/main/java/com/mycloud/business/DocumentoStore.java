@@ -5,17 +5,21 @@
  */
 package com.mycloud.business;
 
-import com.mycloud.Configuration;
 import com.mycloud.entity.Documento;
-import java.nio.file.Paths;
+import com.mycloud.entity.User;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
+import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Path;
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 /**
@@ -39,6 +43,10 @@ public class DocumentoStore {
     @Inject
     UserStore userstore;
     
+    @PostConstruct
+    public void init(){
+        
+    }
      public List<Documento> all() {
         System.out.println("token user: " + token.getName());
         System.out.println("token email: " + token.getClaim(Claims.email.name()));
@@ -50,6 +58,8 @@ public class DocumentoStore {
 public Documento find (Integer id){
     return em.find(Documento.class, id);
 }
+
+
 public Documento save (Documento d){
     return em.merge(d);
 }
@@ -78,10 +88,24 @@ public List<Documento> findAll() {
 				.getResultList();
 
 	}
-     private Path documentPath(String name) {
-        return (Path) Paths.get(principal.getName()
-                + Configuration.DOCUMENT_FOLDER + "/" + name);
-    }   
+
+ 
+    }
+
+  
+    
+
+   
+
+      
+
+    
+
+    
+   
+
+ 
+      
         
-}
+
    
